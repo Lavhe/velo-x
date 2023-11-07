@@ -1,0 +1,15 @@
+import React from 'react';
+import Svg, { Path } from 'react-native-svg';
+import { type IconProps } from '../types';
+import { tw } from 'twrnc';
+
+export function PollIcon({ style, color }: IconProps) {
+  return (
+    <Svg style={style} viewBox="0 0 24 24">
+      <Path
+        fill={(color && tw.color(color)) || '#000000'}
+        d="M3,22V8H7V22H3M10,22V2H14V22H10M17,22V14H21V22H17Z"
+      />
+    </Svg>
+  );
+}
