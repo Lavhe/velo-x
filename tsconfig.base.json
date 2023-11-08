@@ -16,6 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "auth": ["libs/auth/src/index.ts"],
+      "drive": ["libs/drive/src/index.ts"],
+      "event": ["libs/event/src/index.ts"],
       "firebase": ["libs/firebase/src/index.ts"],
       "home": ["libs/home/src/index.ts"],
       "icons": ["libs/icons/src/index.ts"],

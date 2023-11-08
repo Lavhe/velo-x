@@ -1,7 +1,7 @@
 import React from 'react';
 import Svg, { Path } from 'react-native-svg';
 import { type IconProps } from '../types';
-import { tw } from 'twrnc';
+import { tw } from 'theme';
 
 export function LogOutIcon({ style, color }: IconProps) {
   return (

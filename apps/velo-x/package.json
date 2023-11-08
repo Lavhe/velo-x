@@ -22,6 +22,7 @@
     "@react-navigation/native-stack": "*",
     "@react-navigation/native": "*",
     "@invertase/react-native-apple-authentication": "*",
-    "@react-navigation/bottom-tabs": "*"
+    "@react-navigation/bottom-tabs": "*",
+    "moment": "*"
   }
 }

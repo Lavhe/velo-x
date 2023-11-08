@@ -1,13 +1,8 @@
-import { HomePage } from 'home';
 import { LoginPage } from 'auth';
 import { LeaderboardPage } from 'leaderboard';
-import {
-  AccountIcon,
-  ChatIcon,
-  EventsIcon,
-  LeaderboardIcon,
-  RaceIcon
-} from 'icons';
+import { EventsPage } from 'event';
+import { EventsIcon, LeaderboardIcon, RaceIcon } from 'icons';
+import { DrivePage } from 'drive';
 // import { Speedometer } from '@jmrsquared-nx/velo-x/screens/speedometer';
 // import { SpeedTest } from '@jmrsquared-nx/velo-x/screens/speed-test';
 // import { Settings } from '@jmrsquared-nx/velo-x/screens/settings';
@@ -19,11 +14,11 @@ export const routes = {
     options: { title: 'Login', icon: () => null }
   },
   Events: {
-    component: HomePage,
+    component: EventsPage,
     options: { title: 'Events', icon: EventsIcon }
   },
   Drive: {
-    component: HomePage,
+    component: DrivePage,
     options: { title: 'Drive', icon: RaceIcon }
   },
   Leaderboard: {

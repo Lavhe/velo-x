@@ -13,3 +13,8 @@ export * from './LeaderboardIcon';
 export * from './EventsIcon';
 export * from './ChatIcon';
 export * from './AccountIcon';
+export * from './LocationPinIcon';
+export * from './MapSearchIcon';
+export * from './SpeedometerIcon';
+export * from './BrakeIcon';
+export * from './QuarterMileIcon';
