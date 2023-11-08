@@ -1,0 +1,85 @@
+default_platform(:ios)
+
+before_all do
+  ensure_git_branch(
+    branch: "main"
+  )
+  # git_pull
+end
+
+platform :ios do
+  def create_temporary_keychain(keychain_name, keychain_password)
+    create_keychain(
+      name: keychain_name,
+      default_keychain: true,
+      password: keychain_password,
+      unlock: true,
+      timeout: 0
+    )
+  end
+
+  def delete_temporary_keychain(keychain_name)
+    delete_keychain(
+      name: keychain_name
+    ) if File.exist? File.expand_path("~/Library/Keychains/#{keychain_name}-db")
+  end
+
+  desc "Fetch certificates and provisioning profiles"
+  private_lane :certificates do
+    iosDirectoryPath = "#{Dir.pwd}".gsub!('fastlane', '');
+    match(
+      app_identifier: ENV["APPLE_APP_IDENTIFIER"],
+      type: "appstore",
+      readonly: true,
+      force_for_new_devices: true,
+      skip_provisioning_profiles: false,
+      keychain_name: ENV["APPLE_TEMP_KEYCHAIN_NAME"],
+      keychain_password: ENV["APPLE_TEMP_KEYCHAIN_PASSWORD"],
+      git_basic_authorization: Base64.strict_encode64(ENV["GIT_AUTHORIZATION"])
+    )
+    profilePath = ENV["sigh_#{ENV["APPLE_APP_IDENTIFIER"]}_appstore_profile-path"]
+    update_project_provisioning(
+      xcodeproj: "#{iosDirectoryPath}VeloX.xcodeproj",
+      profile: profilePath,
+      build_configuration: "Release",
+    )
+    update_project_team(
+      path: "#{iosDirectoryPath}VeloX.xcodeproj",
+      teamid: "#{ENV['APPLE_TEAM_ID']}"
+    )
+  end
+
+  desc "Build app"
+  lane :build do
+    delete_temporary_keychain(ENV["APPLE_TEMP_KEYCHAIN_NAME"])
+    create_temporary_keychain(ENV["APPLE_TEMP_KEYCHAIN_NAME"], ENV["APPLE_TEMP_KEYCHAIN_PASSWORD"])
+
+    certificates()
+
+    workspacePath = "#{Dir.pwd}".gsub!('fastlane', 'VeloX.xcworkspace');
+
+    build_app(
+      configuration: "Release",
+      workspace: workspacePath,
+      scheme: "VeloX",
+    )
+
+    delete_temporary_keychain(ENV["APPLE_TEMP_KEYCHAIN_NAME"])
+
+    api_key = app_store_connect_api_key(
+      key_id: ENV["APPLE_API_KEY_ID"],
+      issuer_id: ENV["APPLE_API_ISSUER_ID"],
+      key_filepath: "#{Dir.pwd}/#{ENV["APPLE_API_KEY_FILE"]}"
+    )
+
+    upload_to_testflight(
+      api_key: api_key,
+    )
+  end
+    # desc "Push a new beta build to TestFlight"
+  # lane :beta do
+  #   increment_build_number(xcodeproj: "VeloX.xcodeproj")
+  #   build_app(workspace: "VeloX.xcworkspace", scheme: "VeloX")
+  #   upload_to_testflight
+  # end
+end

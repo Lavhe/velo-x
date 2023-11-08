@@ -1,9 +1,10 @@
-import React from 'react';
-import { render } from '@testing-library/react-native';
+import React from "react";
+import { render } from "@testing-library/react-native";
 
-import App from './App';
+import { Loader } from "ui";
 
-test('renders correctly', () => {
-  const { getByTestId } = render(<App />);
-  expect(getByTestId('heading')).toHaveTextContent('Welcome');
+test("renders correctly", () => {
+  const { root, getByAccessibilityHint } = render(<Loader />);
+
+  expect(getByAccessibilityHint("loading")).toBeTruthy();
 });

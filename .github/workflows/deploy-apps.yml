@@ -1,0 +1,132 @@
+name: Publish to Google internal test for Android and to Testflight for iOS
+"on":
+  workflow_run:
+    workflows: ["Build and test"]
+    branches: ["main"]
+    types:
+      - completed
+
+  workflow_dispatch:
+
+jobs:
+  publish-to-google-internal-test:
+    runs-on: macos-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "yarn"
+
+      - name: ruby/setup-ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0"
+          bundler-cache: true
+
+      - name: Set up Java JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: "11"
+          distribution: "zulu"
+          cache: "gradle"
+
+      - name: Install Fastlane
+        run: yarn fastlane:installAndroid
+
+      - name: Install global node modules
+        run: yarn ci
+
+      - name: Install node modules inside react native application
+        run: yarn ci:rnModules
+
+      - name: Create release keystore
+        run: |
+          cd apps/velo-x/android/fastlane
+          echo "${{ secrets.ANDROID_RELEASE_KEYSTORE }}" > ${{ secrets.ANDROID_KEYSTORE_FILE }}.asc
+          gpg -d --passphrase "${{ secrets.ANDROID_RELEASE_KEYSTORE_PASSPHRASE }}" --batch ${{ secrets.ANDROID_KEYSTORE_FILE }}.asc > ${{ secrets.ANDROID_KEYSTORE_FILE }}
+          cd ../../../..
+
+      - name: Create Google Api Service
+        run: |
+          cd apps/velo-x/android
+          echo "${{ secrets.ANDROID_API_KEY }}" > ${{ secrets.ANDROID_API_KEY_FILE }}.asc
+          gpg -d --passphrase "${{ secrets.ANDROID_API_KEY_PASSPHRASE }}" --batch ${{ secrets.ANDROID_API_KEY_FILE }}.asc > ${{ secrets.ANDROID_API_KEY_FILE }}
+          cd ../../..
+
+      - name: Upload to Google Internal Tests with Fastlane
+        run: yarn fastlane:buildAndroid
+        env:
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+          ANDROID_KEYSTORE_ALIAS: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEYSTORE_KEY_PASSPHRASE: ${{ secrets.ANDROID_KEYSTORE_KEY_PASSPHRASE }}
+          ANDROID_API_KEY_FILE: ${{ secrets.ANDROID_API_KEY_FILE }}
+
+  publish-to-testflight:
+    runs-on: macos-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "yarn"
+
+      - name: ruby/setup-ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0"
+          bundler-cache: true
+
+      - name: Set up Java JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: "11"
+          distribution: "zulu"
+          cache: "gradle"
+
+      - name: Install Fastlane
+        run: yarn fastlane:installIos
+
+      - name: Install global node modules
+        run: yarn ci
+
+      - name: Install node modules inside react native application
+        run: yarn ci:rnModules
+
+      - name: Install pods
+        run: yarn ci:pods
+
+      - name: Create Apple Api Service
+        run: |
+          cd apps/velo-x/ios/fastlane
+          echo "${{ secrets.APPLE_API_KEY }}" > ${{ secrets.APPLE_API_KEY_FILE }}.asc
+          gpg -d --passphrase "${{ secrets.APPLE_API_KEY_FILE_PASSPHRASE }}" --batch ${{ secrets.APPLE_API_KEY_FILE }}.asc > ${{ secrets.APPLE_API_KEY_FILE }}
+          cd ../../..
+
+      - name: Upload to Testflight with Fastlane
+        run: yarn fastlane:buildIos
+        env:
+          APPLE_API_KEY_FILE: ${{ secrets.APPLE_API_KEY_FILE }}
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+          APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
+          APPLE_API_KEY_FILE_PASSPHRASE: ${{ secrets.APPLE_API_KEY_FILE_PASSPHRASE }}
+          APPLE_ITC_TEAM_ID: ${{ secrets.APPLE_ITC_TEAM_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_IDENTIFIER: ${{ secrets.APPLE_APP_IDENTIFIER }}
+          APPLE_PROVISIONING_PROFILE_SPECIFIER: ${{ secrets.APPLE_PROVISIONING_PROFILE_SPECIFIER }}
+          APPLE_TEMP_KEYCHAIN_NAME: ${{ secrets.APPLE_TEMP_KEYCHAIN_NAME }}
+          APPLE_TEMP_KEYCHAIN_PASSWORD: ${{ secrets.APPLE_TEMP_KEYCHAIN_PASSWORD }}
+          GIT_AUTHORIZATION: ${{ secrets.GIT_AUTHORIZATION }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}

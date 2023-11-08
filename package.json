@@ -5,7 +5,17 @@
   "scripts": {
     "start": "yarn start:ios",
     "start:ios": "yarn nx run-ios velo-x",
-    "start:android": "yarn nx run-android velo-x"
+    "start:android": "yarn nx run-android velo-x",
+    "ci": "yarn install --frozen-lockfile",
+    "ci:test": "yarn nx test velo-x",
+    "ci:rnModules": "cd apps/velo-x && yarn install --frozen-lockfile && cd ../..",
+    "ci:pods": "cd apps/velo-x/ios && pod install && cd ../../..",
+    "fastlane:installAndroid": "cd apps/velo-x/android && bundle install && cd ../../..",
+    "fastlane:installIos": "cd apps/velo-x/ios && bundle install && cd ../../..",
+    "fastlane:updateAndroid": "cd apps/velo-x/android && bundle update fastlane && cd ../../..",
+    "fastlane:updateIos": "cd apps/velo-x/ios && bundle update fastlane && cd ../../..",
+    "fastlane:buildAndroid": "cd apps/velo-x/android && bundle exec fastlane android build && cd ../../..",
+    "fastlane:buildIos": "cd apps/velo-x/ios && bundle exec fastlane ios build && cd ../../.."
   },
   "private": true,
   "dependencies": {

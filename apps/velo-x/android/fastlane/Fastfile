@@ -1,0 +1,53 @@
+default_platform(:android)
+
+before_all do 
+  ensure_git_branch(
+    branch: "main"
+  )
+  # git_pull
+end
+
+platform :android do
+  desc "Build and publish the Android application"
+  lane :build do
+    gradle(task: "clean")
+    gradle(
+      task: "bundle",
+      build_type: "Release",
+      print_command: false,
+      properties: {
+        "android.injected.signing.store.file" => "#{Dir.pwd}/#{ENV['ANDROID_KEYSTORE_FILE']}",
+        "android.injected.signing.store.password" => ENV['ANDROID_KEYSTORE_PASSWORD'],
+        "android.injected.signing.key.alias" => ENV['ANDROID_KEYSTORE_ALIAS'],
+        "android.injected.signing.key.password" => ENV['ANDROID_KEYSTORE_PASSWORD']
+      }
+    )
+
+    upload_to_play_store(
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      skip_upload_changelogs: true,
+      skip_upload_apk: true,
+      changes_not_sent_for_review: true,
+      track: 'internal'
+    )
+  end
+
+  # desc "Runs all the tests"
+  # lane :test do
+  #   gradle(task: "test")
+  # end
+
+  # desc "Submit a new Beta Build to Crashlytics Beta"
+  # lane :beta do
+  #   gradle(task: "clean assembleRelease")
+  #   crashlytics
+  # end
+
+  # desc "Deploy a new version to the Google Play"
+  # lane :deploy do
+  #   gradle(task: "clean assembleRelease")
+  #   upload_to_play_store
+  # end
+end

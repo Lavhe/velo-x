@@ -451,6 +451,7 @@
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-VeloX-VeloXTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 492MSZQLTQ;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -467,7 +468,6 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jmrsquared.velox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VeloX.app/VeloX";
 			};
@@ -479,6 +479,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 492MSZQLTQ;
 				INFOPLIST_FILE = VeloXTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -491,8 +492,9 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jmrsquared.velox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "03535339-c7a4-4c7d-a68a-9c3d28f730af";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.jmrsquared.velo-x";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VeloX.app/VeloX";
 			};
 			name = Release;
@@ -503,8 +505,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 492MSZQLTQ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 492MSZQLTQ;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = VeloX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -517,8 +523,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jmrsquared.velox;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jmrsquared.velo-x";
 				PRODUCT_NAME = VeloX;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.jmrsquared.velo-x";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -531,6 +539,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 492MSZQLTQ;
 				INFOPLIST_FILE = VeloX/Info.plist;
@@ -544,8 +554,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jmrsquared.velox;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jmrsquared.velo-x";
 				PRODUCT_NAME = VeloX;
+				PROVISIONING_PROFILE = "03535339-c7a4-4c7d-a68a-9c3d28f730af";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.jmrsquared.velo-x";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

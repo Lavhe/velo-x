@@ -76,6 +76,7 @@ local.properties
 *.keystore
 !debug.keystore
 !release.keystore
+!velo-x.keystore
 
 # node.js
 #
@@ -324,3 +325,5 @@ apps/test-app-e2e/artifacts
 apps/testing-app-e2e/artifacts
 .nx/cache/
 apps/velo-x-e2e/artifacts
+
+apps/velo-x/ios/VeloX.app.dSYM.zip
