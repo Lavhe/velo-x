@@ -12,12 +12,5 @@ export function ThemeProvider({ children }: PropsWithChildren) {
     }, [])
   );
 
-  return (
-    <View
-      key={forceRenderKey}
-      style={tw`dark bg-gray-950 text-gray-50 h-screen w-screen`}
-    >
-      {children}
-    </View>
-  );
+  return <View style={tw``}>{children}</View>;
 }

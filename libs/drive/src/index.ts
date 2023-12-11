@@ -1,1 +1,2 @@
-export * from './components/feature-drive';
+export * from './lib/feature-drive';
+export * from './lib/feature-speed-test';

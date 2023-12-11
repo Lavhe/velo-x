@@ -18,3 +18,6 @@ export * from './MapSearchIcon';
 export * from './SpeedometerIcon';
 export * from './BrakeIcon';
 export * from './QuarterMileIcon';
+export * from './FilterIcon';
+export * from './ShareIcon';
+export * from './RefreshIcon';

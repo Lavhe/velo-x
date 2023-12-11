@@ -2,7 +2,7 @@ import { LoginPage } from 'auth';
 import { LeaderboardPage } from 'leaderboard';
 import { EventsPage } from 'event';
 import { EventsIcon, LeaderboardIcon, RaceIcon } from 'icons';
-import { DrivePage } from 'drive';
+import { DrivePage, SpeedTest } from 'drive';
 // import { Speedometer } from '@jmrsquared-nx/velo-x/screens/speedometer';
 // import { SpeedTest } from '@jmrsquared-nx/velo-x/screens/speed-test';
 // import { Settings } from '@jmrsquared-nx/velo-x/screens/settings';
@@ -23,24 +23,24 @@ export const routes = {
   },
   Leaderboard: {
     component: LeaderboardPage,
-    options: { title: 'Events', icon: LeaderboardIcon }
+    options: { title: 'Leaderboard', icon: LeaderboardIcon }
+  },
+  SpeedTest: {
+    component: SpeedTest,
+    options: { title: 'SpeedTest', icon: () => null }
+  },
+  Speedometer: {
+    component: SpeedTest,
+    options: { title: 'Speedometer', icon: () => null }
+  },
+  Settings: {
+    component: SpeedTest,
+    options: { title: 'Settings', icon: () => null }
+  },
+  QuarterMile: {
+    component: SpeedTest,
+    options: { title: 'Quarter Mile', icon: () => null }
   }
-  //   Speedometer: {
-  //     component: Speedometer,
-  //     options: { title: 'Speedometer' },
-  //   },
-  //   SpeedTest: {
-  //     component: SpeedTest,
-  //     options: { title: 'SpeedTest' },
-  //   },
-  //   Settings: {
-  //     component: Settings,
-  //     options: { title: 'Settings' },
-  //   },
-  //   QuarterMile: {
-  //     component: QuarterMile,
-  //     options: { title: 'Quarter Mile' },
-  //   },
 } as const;
 
 export type RoutePath = keyof typeof routes;

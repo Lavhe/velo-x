@@ -93,19 +93,19 @@ export function Navigation() {
         screenOptions={({ route }) => ({
           header: () => null,
           tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-
-            if (route.name === 'Home') {
-              iconName = focused
-                ? 'ios-information-circle'
-                : 'ios-information-circle-outline';
-            } else if (route.name === 'Settings') {
-              iconName = focused ? 'ios-list-box' : 'ios-list';
-            }
-
             const Icon = routes[route.name as RoutePath].options.icon;
 
-            return <Icon style={tw`text-white h-6 w-6`} />;
+            return (
+              <Icon
+                style={tw`h-5 w-5 ease-in-out transform duration-200 ${
+                  focused ? 'text-primary h-7 w-7' : 'text-white'
+                }`}
+              />
+            );
+          },
+          tabBarStyle: {
+            paddingVertical: 10,
+            backgroundColor: '#030712',
           },
         })}
         tabBarOptions={{
@@ -114,15 +114,15 @@ export function Navigation() {
         }}
       >
         {pages
-          .filter((routeName) => routeName !== 'Login')
+          .filter((routeName) =>
+            ['Events', 'Drive', 'Leaderboard'].includes(routeName)
+          )
           .map((routeName) => (
-            <Tab.Screen name={routeName} key={routeName}>
-              {(props) => (
-                <ThemeProvider>
-                  {routes[routeName as RoutePath].component()}
-                </ThemeProvider>
-              )}
-            </Tab.Screen>
+            <Tab.Screen
+              name={routeName}
+              key={routeName}
+              component={routes[routeName as RoutePath].component}
+            />
           ))}
       </Tab.Navigator>
     </NavigationContainer>

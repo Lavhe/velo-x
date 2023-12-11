@@ -27,14 +27,14 @@ export const useTailwind = () => {
 
 // ... and then this becomes the main function your app uses
 export const theme = {
-  dark: false,
+  dark: true,
   colors: {
-    primary: 'rgb(10, 132, 255)',
-    card: 'rgb(18, 18, 18)',
-    background: 'rgb(1, 1, 1)',
+    primary: '#1fcecb',
+    card: '#111827',
+    background: '#030712',
     text: 'rgb(229, 229, 231)',
-    border: 'rgb(39, 39, 41)',
-    notification: 'rgb(255, 69, 58)'
+    border: '#111827',
+    notification: '#111827'
   }
 } as const;
 

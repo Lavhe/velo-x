@@ -14,14 +14,15 @@ const { assetExts, sourceExts } = defaultConfig.resolver;
 const customConfig = {
   transformer: {
     babelTransformerPath: require.resolve('react-native-svg-transformer'),
+    unstable_allowRequireContext: true
   },
   resolver: {
     assetExts: assetExts.filter((ext) => ext !== 'svg'),
     sourceExts: [...sourceExts, 'svg'],
-    blockList: exclusionList([/^(?!.*node_modules).*\/dist\/.*/]),
+    blockList: exclusionList([/^(?!.*node_modules).*\/dist\/.*/])
     // unstable_enableSymlinks: true,
     // unstable_enablePackageExports: true,
-  },
+  }
 };
 
 module.exports = withNxMetro(mergeConfig(defaultConfig, customConfig), {
@@ -31,5 +32,5 @@ module.exports = withNxMetro(mergeConfig(defaultConfig, customConfig), {
   // all the file extensions used for imports other than 'ts', 'tsx', 'js', 'jsx', 'json'
   extensions: [],
   // Specify folders to watch, in addition to Nx defaults (workspace libraries and node_modules)
-  watchFolders: [],
+  watchFolders: []
 });

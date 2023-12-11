@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StatusBar, View } from 'react-native';
+import { StatusBar, View, SafeAreaView } from 'react-native';
 
 import { UserProvider } from 'auth';
 import { Loader } from 'ui';
@@ -15,11 +15,13 @@ export function App() {
   }
 
   return (
-    <UserProvider loaded={() => setIsLoading(false)}>
-      <View style={tw`dark h-full w-full dark:bg-red-600 text-white`}>
-        <StatusBar barStyle="dark-content" />
-        {isLoading ? <Loader /> : <Navigation />}
-      </View>
-    </UserProvider>
+    <SafeAreaView>
+      <UserProvider loaded={() => setIsLoading(false)}>
+        <View style={tw`dark h-full w-full dark:bg-red-600 text-white`}>
+          <StatusBar barStyle="dark-content" />
+          {isLoading ? <Loader /> : <Navigation />}
+        </View>
+      </UserProvider>
+    </SafeAreaView>
   );
 }

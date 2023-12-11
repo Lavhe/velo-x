@@ -22,6 +22,7 @@
       "home": ["libs/home/src/index.ts"],
       "icons": ["libs/icons/src/index.ts"],
       "leaderboard": ["libs/leaderboard/src/index.ts"],
+      "location": ["libs/location/src/index.ts"],
       "navigation": ["libs/navigation/src/index.ts"],
       "theme": ["libs/theme/src/index.ts"],
       "ui": ["libs/ui/src/index.ts"]
