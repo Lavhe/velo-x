@@ -11,7 +11,6 @@ import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Stack = createNativeStackNavigator();
-
 // export function NavigationOld() {
 //   const { loaded } = useTailwind();
 //   const { currentUser } = useUserContext();
@@ -86,45 +85,72 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const pages = Object.keys(routes) as RoutePath[];
 
+function TabNavigator() {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        header: () => null,
+        tabBarIcon: ({ focused, color, size }) => {
+          const Icon = routes[route.name as RoutePath]?.options?.icon;
+
+          if (!Icon) {
+            return null;
+          }
+
+          return (
+            <Icon
+              style={tw`h-5 w-5 ease-in-out transform duration-200 ${
+                focused ? 'text-primary h-7 w-7' : 'text-white'
+              }`}
+            />
+          );
+        },
+        tabBarStyle: {
+          paddingVertical: 10,
+          backgroundColor: '#030712',
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: '#1fcecb',
+        inactiveTintColor: 'white',
+      }}
+    >
+      {pages
+        .filter((routeName) =>
+          ['Events', 'Drive', 'Leaderboard'].includes(routeName)
+        )
+        .map((routeName) => (
+          <Tab.Screen
+            name={routeName}
+            key={routeName}
+            component={routes[routeName as RoutePath].component}
+          />
+        ))}
+    </Tab.Navigator>
+  );
+}
+
 export function Navigation() {
   return (
     <NavigationContainer theme={theme}>
-      <Tab.Navigator
+      <Stack.Navigator
         screenOptions={({ route }) => ({
           header: () => null,
-          tabBarIcon: ({ focused, color, size }) => {
-            const Icon = routes[route.name as RoutePath].options.icon;
-
-            return (
-              <Icon
-                style={tw`h-5 w-5 ease-in-out transform duration-200 ${
-                  focused ? 'text-primary h-7 w-7' : 'text-white'
-                }`}
-              />
-            );
-          },
-          tabBarStyle: {
-            paddingVertical: 10,
-            backgroundColor: '#030712',
-          },
         })}
-        tabBarOptions={{
-          activeTintColor: '#1fcecb',
-          inactiveTintColor: 'white',
-        }}
       >
+        <Stack.Screen name="TabNavigator" component={TabNavigator} />
         {pages
           .filter((routeName) =>
-            ['Events', 'Drive', 'Leaderboard'].includes(routeName)
+            ['Events', 'Drive', 'Leaderboard'].some((v) => v !== routeName)
           )
           .map((routeName) => (
-            <Tab.Screen
+            <Stack.Screen
               name={routeName}
               key={routeName}
               component={routes[routeName as RoutePath].component}
             />
           ))}
-      </Tab.Navigator>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

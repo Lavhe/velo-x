@@ -2,7 +2,7 @@ import { LoginPage } from 'auth';
 import { LeaderboardPage } from 'leaderboard';
 import { EventsPage } from 'event';
 import { EventsIcon, LeaderboardIcon, RaceIcon } from 'icons';
-import { DrivePage, SpeedTest } from 'drive';
+import { DrivePage, QuarterMile, SpeedTest } from 'drive';
 // import { Speedometer } from '@jmrsquared-nx/velo-x/screens/speedometer';
 // import { SpeedTest } from '@jmrsquared-nx/velo-x/screens/speed-test';
 // import { Settings } from '@jmrsquared-nx/velo-x/screens/settings';
@@ -11,7 +11,7 @@ import { DrivePage, SpeedTest } from 'drive';
 export const routes = {
   Login: {
     component: LoginPage,
-    options: { title: 'Login', icon: () => null }
+    options: { title: 'Login' }
   },
   Events: {
     component: EventsPage,
@@ -27,19 +27,19 @@ export const routes = {
   },
   SpeedTest: {
     component: SpeedTest,
-    options: { title: 'SpeedTest', icon: () => null }
+    options: { title: 'SpeedTest' }
   },
   Speedometer: {
     component: SpeedTest,
-    options: { title: 'Speedometer', icon: () => null }
+    options: { title: 'Speedometer' }
   },
   Settings: {
     component: SpeedTest,
-    options: { title: 'Settings', icon: () => null }
+    options: { title: 'Settings' }
   },
   QuarterMile: {
-    component: SpeedTest,
-    options: { title: 'Quarter Mile', icon: () => null }
+    component: QuarterMile,
+    options: { title: 'Quarter Mile' }
   }
 } as const;
 

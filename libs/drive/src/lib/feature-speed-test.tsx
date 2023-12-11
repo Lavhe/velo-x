@@ -18,7 +18,7 @@ const ClassNames = {
   SpeedometerRow: tw`mt-5 -mb-12 mx-auto justify-center`,
   RestartButtonRow: tw`absolute right-1 z-10`,
   RestartButton: tw`flex-row shadow-md rounded-full m-4 p-3 bg-white dark:bg-gray-800 w-12 h-12`,
-  RestartText: tw`font-light text-center text-md`,
+  RestartText: tw`font-light text-center text-md text-white`,
   Results: tw` shadow-xl rounded-2xl bg-white dark:bg-gray-800 mx-6 p-4 my-auto`,
   ResultsRow: tw`flex flex-row justify-center py-3 items-end`,
   ResultsSpeed: tw`font-bold text-5xl my-auto`,

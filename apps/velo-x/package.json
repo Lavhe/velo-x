@@ -26,6 +26,7 @@
     "moment": "*",
     "react-native-reanimated": "*",
     "react-native-geolocation-service": "*",
-    "react-native-share": "*"
+    "react-native-share": "*",
+    "geolib": "*"
   }
 }
