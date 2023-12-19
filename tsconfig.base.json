@@ -24,6 +24,7 @@
       "leaderboard": ["libs/leaderboard/src/index.ts"],
       "location": ["libs/location/src/index.ts"],
       "navigation": ["libs/navigation/src/index.ts"],
+      "profile": ["libs/profile/src/index.ts"],
       "theme": ["libs/theme/src/index.ts"],
       "ui": ["libs/ui/src/index.ts"]
     }

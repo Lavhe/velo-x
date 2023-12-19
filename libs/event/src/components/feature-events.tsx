@@ -12,11 +12,45 @@ import {
 import moment from 'moment';
 import { useState } from 'react';
 import { useEvents } from '../hooks/useEvents';
+import { Loader } from 'ui';
 
 export function EventsPage() {
-  const [scrollOffsetY, setScrollOffsetY] = useState(0);
-  const { upcomingEvents, popularEvents } = useEvents();
+  const { upcomingEvents, popularEvents, loading, error } = useEvents();
 
+  if (loading) {
+    return (
+      <View
+        style={tw`h-screen w-screen justify-center items-center bg-primary`}
+      >
+        <Loader />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View
+        style={tw`h-screen w-screen justify-center items-center bg-primary`}
+      >
+        <Text style={tw`text-red-600 font-semibold text-sm`}>{error}</Text>
+      </View>
+    );
+  }
+
+  return (
+    <Content upcomingEvents={upcomingEvents} popularEvents={popularEvents} />
+  );
+}
+
+interface Props {
+  upcomingEvents: ReturnType<typeof useEvents>['upcomingEvents'];
+  popularEvents: ReturnType<typeof useEvents>['popularEvents'];
+}
+
+function Content({ upcomingEvents, popularEvents }: Props) {
+  const [scrollOffsetY, setScrollOffsetY] = useState(0);
+
+  console.log('Rerender');
   return (
     <View
       style={tw`flex h-full text-white ${
@@ -56,14 +90,16 @@ export function EventsPage() {
       </View>
 
       <ScrollView
-        style={tw`flex-1 gap-4 pt-44 z-5 border-t-full`}
+        style={tw`flex-1 gap-4 z-5 border-t-full ${
+          scrollOffsetY < 44 ? 'pt-' + (44 - scrollOffsetY) : ''
+        }`}
         onScroll={({
           nativeEvent: {
             contentOffset: { y },
           },
         }) => setScrollOffsetY(y)}
       >
-        <View style={tw`w-full z-10  p-4 bg-gray-950`}>
+        <View style={tw`w-full z-10 p-4 bg-gray-950`}>
           <Text style={tw`font-bold text-xl text-primary my-4`}>
             Popular Events 🔥
           </Text>

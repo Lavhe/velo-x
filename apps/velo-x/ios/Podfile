@@ -7,6 +7,15 @@ require Pod::Executable.execute_command('node', ['-p',
 
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
+# Note that there is a space character after `$(inherited)`
+
+def append_header_search_path(target, path)
+  target.build_configurations.each do |config|
+      
+      config.build_settings["HEADER_SEARCH_PATHS"] ||= "$(inherited) "
+      config.build_settings["HEADER_SEARCH_PATHS"] << path
+  end
+end
 
 # If you are using a `react-native-flipper` your iOS build will fail when `NO_FLIPPER=1` is set.
 # because `react-native-flipper` depends on (FlipperKit,...) that will be excluded
@@ -60,5 +69,11 @@ target 'VeloX' do
       :mac_catalyst_enabled => false
     )
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
+
+    installer.pods_project.targets.each do |target|
+      if ["React-cxxreact", "React-NativeModulesApple", "RNGestureHandler", "RNScreens", "React-utils", "React-runtimescheduler", "RCTTurboModule", "RCTTurboModuleManager", "RCTTurboModuleBinding", "RCTTurboCxxModule"].any? { |t| t == target.name }
+        append_header_search_path(target, "${PODS_ROOT}/../../node_modules/react-native/ReactCommon")
+      end
+     end  
   end
 end

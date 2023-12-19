@@ -1,6 +1,6 @@
 import {
-  FirebaseFirestoreTypes,
-  firebase
+  firebase,
+  FirebaseFirestoreTypes
 } from '@react-native-firebase/firestore';
 import { Collections } from '../utils/collections';
 import { useEffect, useMemo, useState } from 'react';
@@ -11,25 +11,19 @@ const firestore = firebase.firestore();
 export function useDocuments<T extends z.AnyZodObject>(
   schema: T,
   collection: Collections,
-  filters?: {
-    fieldPath: string | number | FirebaseFirestoreTypes.FieldPath;
-    opStr: FirebaseFirestoreTypes.WhereFilterOp;
-    value: unknown;
-  }[]
+  filter?: FirebaseFirestoreTypes.QueryFilterConstraint
 ) {
   const [data, setData] = useState<z.infer<typeof schema>[]>([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const ref = useMemo(() => firestore.collection(collection), [collection]);
-
   useEffect(() => {
     setLoading(true);
-    const query = ref;
+    const query = firestore.collection(collection);
 
-    (filters || []).forEach((filter) => {
-      query.where(filter.fieldPath, filter.opStr, filter.value);
-    });
+    if (filter) {
+      query.where(filter);
+    }
 
     const subscriber = query.onSnapshot(
       (documentSnapshot) => {
@@ -50,12 +44,12 @@ export function useDocuments<T extends z.AnyZodObject>(
     );
 
     return () => subscriber();
-  }, [ref, filters, schema]);
+  }, []);
 
-  const addDocument = async (data: T) => {
+  const addDocument = async (data: z.infer<T>) => {
     setLoading(true);
     try {
-      await ref.add({
+      await firestore.collection(collection).add({
         ...JSON.parse(JSON.stringify(data)),
         updated: firebase.firestore.FieldValue.serverTimestamp()
       });
@@ -109,7 +103,7 @@ export function useDocument<T extends z.AnyZodObject>(
     );
 
     return () => subscriber();
-  }, [ref, schema]);
+  }, []);
 
   const updateDocument = async (data: Partial<T>) => {
     setLoading(true);
