@@ -3,4 +3,5 @@ export enum Collections {
   SPEED_TEST = 'speed-test',
   QUARTER_MILE = 'quarter-mile',
   USERS = 'users',
+  EVENTS = 'events'
 }

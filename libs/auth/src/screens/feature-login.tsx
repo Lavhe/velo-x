@@ -14,7 +14,7 @@ const ClassNames = {
   Content: tw`flex align-center w-full my-auto`,
   MainContent: tw`flex align-center w-full my-auto gap-6`,
   Card: tw`flex-row bg-gray-900 mx-auto h-auto align-center shadow-xl my-auto shadow-radius-1 shadow-color-opacity-100 rounded-xl p-4`,
-  Title: tw`text-gray-900 dark:text-white px-2 text-sm font-semibold my-auto`,
+  Title: tw`text-white px-2 text-sm font-semibold my-auto`,
   Icon: tw`h-6 w-6 my-auto text-white`,
   Loader: tw`h-screen w-screen my-auto mx-auto`,
   Error: tw`text-white text-red-400 text-center font-semibold text-xs py-2`,

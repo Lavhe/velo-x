@@ -27,6 +27,7 @@
     "react-native-reanimated": "*",
     "react-native-geolocation-service": "*",
     "react-native-share": "*",
-    "geolib": "*"
+    "geolib": "*",
+    "zod": "*"
   }
 }

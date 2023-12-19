@@ -1,12 +1,9 @@
-import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useUserContext } from 'auth';
 import { RoutePath, routes } from '../utils/routes';
-import { Header } from './Header';
-import { PropsWithChildren, useCallback, useState } from 'react';
-import { ThemeProvider, theme, tw, useTailwind } from 'theme';
-import { Text } from 'react-native';
+import { theme, tw } from 'theme';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -131,8 +128,25 @@ function TabNavigator() {
 }
 
 export function Navigation() {
+  const { currentUser } = useUserContext();
+  console.log({ currentUser });
+
+  if (!currentUser) {
+    return (
+      <NavigationContainer key="logged-out" theme={theme}>
+        <Stack.Navigator
+          screenOptions={({ route }) => ({
+            header: () => null,
+          })}
+        >
+          <Stack.Screen name="Login" component={routes.Login.component} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+
   return (
-    <NavigationContainer theme={theme}>
+    <NavigationContainer key="logged-in" theme={theme}>
       <Stack.Navigator
         screenOptions={({ route }) => ({
           header: () => null,

@@ -36,6 +36,5 @@
       "!{projectRoot}/eslint.config.js"
     ],
     "sharedGlobals": []
-  },
-  "nxCloudAccessToken": "ZDljN2Y5YTctZDBmZC00Zjk2LWIzNjAtNDljYTE1MDgzNDYzfHJlYWQtd3JpdGU="
+  }
 }

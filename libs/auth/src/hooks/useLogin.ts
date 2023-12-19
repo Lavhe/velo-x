@@ -69,7 +69,7 @@ export function useLogin() {
         ...(fullUser.data() as any),
         id: fullUser.id
       });
-    } catch (err: any) {
+    } catch (err) {
       console.log('error', { err });
     }
     setIsLoading(false);
@@ -103,7 +103,7 @@ export function useLogin() {
       await auth().signInWithCredential(appleCredential);
 
       await syncUserWithDB(user);
-    } catch (err: any) {
+    } catch (err) {
       console.log('error', { err }, err, JSON.stringify(err));
       setError('Failed to log in, try again later');
     }
@@ -129,7 +129,7 @@ export function useLogin() {
       await auth().signInWithCredential(googleCredential);
 
       await syncUserWithDB(user);
-    } catch (err: any) {
+    } catch (err) {
       console.log('error', { err }, err, JSON.stringify(err));
       setError('Failed to log in, try again later');
     }

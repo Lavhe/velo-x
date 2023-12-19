@@ -11,36 +11,11 @@ import {
 } from 'react-native';
 import moment from 'moment';
 import { useState } from 'react';
-
-const popularData = [
-  {
-    title: 'Wicky Wednesdays at the Rock raceway',
-    date: moment().add(52, 'hours').toDate(),
-    pic: 'https://img.freepik.com/premium-psd/car-show-social-media-instagram-post-design-template_584197-35.jpg',
-    location: 'Brakpan, Johannesburg',
-  },
-  {
-    title: 'Amsterdam car show',
-    date: moment().add(63, 'hours').toDate(),
-    pic: 'https://graphicriver.img.customer.envatousercontent.com/files/304444342/Car+Show+Flyer+Preview.jpg?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=590&s=b923fb5f94799a26fb6f40280248d230',
-    location: 'Sunny side, Pretoria',
-  },
-  {
-    title: 'ODI 2023 shutdown',
-    date: moment().add(63, 'hours').toDate(),
-    pic: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/car-show-flyer-template-a3b3e12ae6c1098232b6d3e2f1eccb0d_screen.jpg?ts=1636974494',
-    location: 'Modderfontein, Johannesburg',
-  },
-];
-
-const upcomingEvents = popularData
-  .concat(popularData)
-  .concat(popularData)
-  .concat(popularData)
-  .sort(() => (Math.random() > 0.5 ? 1 : -1));
+import { useEvents } from '../hooks/useEvents';
 
 export function EventsPage() {
   const [scrollOffsetY, setScrollOffsetY] = useState(0);
+  const { upcomingEvents, popularEvents } = useEvents();
 
   return (
     <View
@@ -94,14 +69,14 @@ export function EventsPage() {
           </Text>
 
           <ScrollView horizontal style={tw`flex gap-10`}>
-            {popularData.map((data, key) => {
+            {popularEvents.map((data, key) => {
               return (
                 <View
                   key={key}
                   style={tw`gap-4 w-[70vw] py-6 px-4 align-center`}
                 >
                   <Image
-                    source={{ uri: data.pic }}
+                    source={{ uri: data.poster }}
                     style={tw`h-52 w-52 rounded-md`}
                   />
                   <View style={tw`flex flex-row`}>
@@ -112,7 +87,7 @@ export function EventsPage() {
                         {data.title}
                       </Text>
                       <Text style={tw`font-light text-white text-md`}>
-                        {moment(data.date).format('dddd, DD MMMM YYYY')}
+                        {moment(data.startDate).format('dddd, DD MMMM YYYY')}
                       </Text>
 
                       <Text
@@ -121,7 +96,7 @@ export function EventsPage() {
                         <LocationPinIcon
                           style={tw`h-4 w-4 my-auto text-white`}
                         />{' '}
-                        {data.location}
+                        {data.location.address}
                       </Text>
                     </View>
                   </View>
@@ -135,7 +110,7 @@ export function EventsPage() {
           {upcomingEvents.map((data, key) => (
             <View key={key} style={tw`flex flex-row my-4 gap-4`}>
               <Image
-                source={{ uri: data.pic }}
+                source={{ uri: data.poster }}
                 style={tw`h-32 w-32 rounded-md`}
               />
               <View style={tw`flex flex-col gap-2`}>
@@ -144,10 +119,10 @@ export function EventsPage() {
                 </Text>
                 <View style={tw`my-auto`}>
                   <Text style={tw`font-light text-white text-md`}>
-                    {moment(data.date).format('dddd, DD MMMM YYYY')}
+                    {moment(data.startDate).format('dddd, DD MMMM YYYY')}
                   </Text>
                   <Text style={tw`font-thin gap-4 text-white my-auto text-md`}>
-                    {data.location}
+                    {data.location.address}
                   </Text>
                 </View>
               </View>
