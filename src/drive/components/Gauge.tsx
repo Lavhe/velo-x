@@ -1,5 +1,5 @@
 import {tw} from 'velo-x/theme';
-import React, {useMemo, memo} from 'react';
+import React, {useMemo, memo, useState, useEffect} from 'react';
 import {View, Dimensions} from 'react-native';
 import Svg, {Path, Circle, Text, G, Rect} from 'react-native-svg';
 // import Animated from 'react-native-reanimated';
@@ -111,6 +111,7 @@ export function SpeedometerGauge(props: CircularProgressProps) {
 
     return (
       <Path
+        id="gauge-stick"
         stroke={tw.color('primary')}
         strokeWidth={5}
         strokeLinecap="round"
@@ -132,7 +133,7 @@ export function SpeedometerGauge(props: CircularProgressProps) {
   }, [locationState]);
 
   return (
-    <Svg width={size} height={size}>
+    <Svg width={size} height={size} style={tw`transition-all duration-500`}>
       <Path
         stroke={tw.color('gray-800')}
         fill="none"

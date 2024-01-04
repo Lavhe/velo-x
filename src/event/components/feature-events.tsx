@@ -128,8 +128,7 @@ function Content({upcomingEvents, popularEvents}: Props) {
                   </View>
                   <View style={tw`flex flex-row`}>
                     <View style={tw`flex gap-2`}>
-                      <Text
-                        style={tw`font-bold text-white text-xl whitespace-nowrap`}>
+                      <Text style={tw`font-bold text-white text-xl`}>
                         {data.title}
                       </Text>
                       <Text style={tw`font-light text-white text-md`}>

@@ -51,10 +51,10 @@ export function useDriveScreenItems() {
       const [startSpeed, targetSpeed] = speeds.map(speed => +speed);
 
       return {
-        title: `${startSpeed}${unitOfSpeed} - ${targetSpeed}${unitOfSpeed} test`,
+        title: `${startSpeed} - ${targetSpeed}${unitOfSpeed} test`,
         description: `Tests the acceleration of your ${
           currentProfile?.name ?? 'vehicle'
-        } from ${startSpeed}${unitOfSpeed} to ${targetSpeed}${unitOfSpeed}`,
+        } from ${startSpeed} to ${targetSpeed}${unitOfSpeed}`,
         icon: RaceIcon,
         routeName: 'SpeedTest',
         params: {

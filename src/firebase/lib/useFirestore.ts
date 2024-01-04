@@ -127,11 +127,28 @@ export function useCreateOrUpdateDocument<T extends z.AnyZodObject>(
     return id;
   };
 
+  const deleteDocument = async (id: string) => {
+    setLoading(true);
+    setError('');
+
+    try {
+      await firestore.collection(collection).doc(id).delete();
+    } catch (error) {
+      console.log(error);
+      setError((error as {message: string}).message);
+    } finally {
+      setLoading(false);
+    }
+
+    return id;
+  };
+
   return {
     error,
     loading,
     addDocument,
     updateDocument,
+    deleteDocument,
   };
 }
 

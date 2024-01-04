@@ -142,7 +142,7 @@ export function Content({
                     {second.vehicleName}
                   </Text>
                   <Text
-                    style={tw`rounded-full text-white text-xs font-black mx-10 py-0.5 text-center bg-opacity-80  bg-gray-900 rounded-full whitespace-nowrap`}>
+                    style={tw`rounded-full text-white text-xs font-black mx-10 py-0.5 text-center bg-opacity-80  bg-gray-900 rounded-full`}>
                     {second.time}s
                   </Text>
 
@@ -167,7 +167,7 @@ export function Content({
                     {first.vehicleName}
                   </Text>
                   <Text
-                    style={tw`text-white text-xs font-black mx-10 py-0.5 text-center bg-opacity-80  bg-gray-900 rounded-full whitespace-nowrap`}>
+                    style={tw`text-white text-xs font-black mx-10 py-0.5 text-center bg-opacity-80  bg-gray-900 rounded-full`}>
                     {first.time}s
                   </Text>
 
@@ -192,7 +192,7 @@ export function Content({
                     {third.vehicleName}
                   </Text>
                   <Text
-                    style={tw`text-white text-xs font-black mx-10 py-0.5 text-center bg-opacity-80  bg-gray-900 rounded-full whitespace-nowrap`}>
+                    style={tw`text-white text-xs font-black mx-10 py-0.5 text-center bg-opacity-80  bg-gray-900 rounded-full`}>
                     {third.time}s
                   </Text>
 

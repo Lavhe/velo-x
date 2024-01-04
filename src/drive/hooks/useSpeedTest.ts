@@ -220,6 +220,18 @@ export function useSpeedTest({
       return;
     }
 
+    if (state === States.RUNNING && speed === startSpeed) {
+      setAllSpeeds(a => ({
+        ...a,
+        [timestamp]: {
+          speed,
+          lat: latitude,
+          lng: longitude,
+          date: new Date(timestamp),
+        },
+      }));
+    }
+
     if (state === States.RUNNING && speed > startSpeed) {
       setMessage(null);
       setAllSpeeds(a => ({

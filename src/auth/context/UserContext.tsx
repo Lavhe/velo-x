@@ -13,6 +13,7 @@ import {CurrentUser} from '../types';
 import auth from '@react-native-firebase/auth';
 import {Collections, useDocument} from 'velo-x/firebase';
 import {schema as profileSchema} from 'velo-x/profile';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const MyUserContext = createContext({
   currentUser: null as null | CurrentUser,
@@ -51,14 +52,24 @@ export function UserProvider(props: PropsWithChildren<UserProviderProps>) {
     currentUser?.selectedProfile ?? '',
   );
 
-  console.log('Re-render', {
-    profile,
-    loading,
-    error,
-    id: currentUser?.selectedProfile,
-  });
   useEffect(() => {
-    console.log('in USE EFFECT');
+    if (currentUser) {
+      Promise.all([
+        crashlytics().setUserId(currentUser.id),
+        crashlytics().setAttributes(
+          Object.keys(currentUser).reduce(
+            (acc, key) => ({
+              ...acc,
+              [key]: JSON.stringify((currentUser as any)[key] || {}),
+            }),
+            {} as Record<string, string>,
+          ),
+        ),
+      ]);
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
     AsyncStorage.multiGet([StorageKey.CurrentUser], (err, result) => {
       if (err) {
         return loaded();

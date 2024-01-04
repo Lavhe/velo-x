@@ -7,6 +7,7 @@ import {type CurrentUser} from '../types';
 import {useUserContext} from '../context/UserContext';
 import {appleAuth} from '@invertase/react-native-apple-authentication';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 GoogleSignin.configure({
   webClientId:
@@ -43,6 +44,7 @@ export function useLogin() {
         ...(fullUser.data() as any),
         id: fullUser.id,
       });
+      crashlytics().log('Google login');
     },
     [collectionRef, setCurrentUser],
   );
@@ -88,6 +90,8 @@ export function useLogin() {
         ...(fullUser.data() as any),
         id: fullUser.id,
       });
+
+      crashlytics().log('Anonymous login');
     } catch (err) {
       console.log('error', {err});
       setError((err as any).message);

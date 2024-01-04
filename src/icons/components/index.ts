@@ -27,3 +27,4 @@ export * from './UploadIcon';
 export * from './PencilIcon';
 export * from './WheelDriveIcon';
 export * from './VehicleTypeIcon';
+export * from './TrashIcon';

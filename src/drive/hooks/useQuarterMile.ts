@@ -164,6 +164,18 @@ export function useQuarterMile({
       return;
     }
 
+    if (state === States.RUNNING && speed === 0) {
+      setAllSpeeds(a => ({
+        ...a,
+        [timestamp]: {
+          speed,
+          lat: latitude,
+          lng: longitude,
+          date: new Date(timestamp),
+        },
+      }));
+    }
+
     if (state === States.RUNNING && speed > 0) {
       setMessage(null);
       setAllSpeeds(a => ({
