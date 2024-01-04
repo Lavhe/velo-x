@@ -48,11 +48,7 @@ export function useDocuments<T extends z.AnyZodObject>(
     );
 
     return () => subscriber();
-  }, [
-    filter?.operator,
-    filter && 'fieldPath' in filter && filter.fieldPath,
-    filter && 'value' in filter && filter.value,
-  ]);
+  }, [JSON.stringify(filter)]);
 
   return {
     data,

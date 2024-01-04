@@ -104,25 +104,27 @@ function Content({upcomingEvents, popularEvents}: Props) {
                   }
                   key={key}
                   style={tw`gap-4 w-[70vw] relative py-6 px-4 align-center`}>
-                  <Image
-                    source={{uri: data.poster}}
-                    style={tw`h-52 w-52 rounded-md`}
-                  />
+                  <View style={tw`h-52 w-52 relative`}>
+                    <Image
+                      source={{uri: data.poster}}
+                      style={tw`h-full w-full rounded-md`}
+                    />
 
-                  <View
-                    style={tw`absolute top-52 right-10 py-px font-bold flex-initial ${
-                      data.entranceFees.length ? 'bg-red-600' : 'bg-red-400'
-                    } rounded-full px-2 gap-4`}>
-                    <Text
-                      style={tw`font-bold flex-initial rounded-full px-2 gap-4 text-white`}>
-                      {data.entranceFees.length
-                        ? `From R${
-                            data.entranceFees.sort(
-                              (a, b) => a.amount - b.amount,
-                            )[0]?.amount
-                          }`
-                        : 'Free'}
-                    </Text>
+                    <View
+                      style={tw`absolute -bottom-2 right-4 py-px font-bold flex-initial ${
+                        data.entranceFees.length ? 'bg-red-600' : 'bg-red-400'
+                      } rounded-full px-2 gap-4`}>
+                      <Text
+                        style={tw`font-bold flex-initial rounded-full px-2 gap-4 text-white`}>
+                        {data.entranceFees.length
+                          ? `From R${
+                              data.entranceFees.sort(
+                                (a, b) => a.amount - b.amount,
+                              )[0]?.amount
+                            }`
+                          : 'Free'}
+                      </Text>
+                    </View>
                   </View>
                   <View style={tw`flex flex-row`}>
                     <View style={tw`flex gap-2`}>
@@ -163,10 +165,29 @@ function Content({upcomingEvents, popularEvents}: Props) {
               }
               key={key}
               style={tw`flex relative flex-row my-4 gap-4 w-full`}>
-              <Image
-                source={{uri: data.poster}}
-                style={tw`h-32 w-32 rounded-md`}
-              />
+              <View style={tw`h-32 w-32 relative`}>
+                <Image
+                  source={{uri: data.poster, width: 120, height: 120}}
+                  resizeMode="cover"
+                  style={tw`rounded-md`}
+                />
+
+                <View
+                  style={tw`absolute bottom-2 right-2 py-px font-bold text-sm flex-initial ${
+                    data.entranceFees.length ? 'bg-red-600' : 'bg-red-400'
+                  } rounded-full px-2 gap-4`}>
+                  <Text
+                    style={tw`font-bold flex-initial rounded-full px-2 gap-4 text-white`}>
+                    {data.entranceFees.length
+                      ? `From R${
+                          data.entranceFees.sort(
+                            (a, b) => a.amount - b.amount,
+                          )[0]?.amount
+                        }`
+                      : 'Free'}
+                  </Text>
+                </View>
+              </View>
               <View style={tw`flex flex-col flex-1 gap-2`}>
                 <Text style={tw`font-bold text-white text-xl`}>
                   {data.title}
@@ -180,21 +201,6 @@ function Content({upcomingEvents, popularEvents}: Props) {
                     {data.location.address?.name}{' '}
                     {data.location.address?.streetName}{' '}
                     {data.location.address?.city} {data.location.address?.state}
-                  </Text>
-                </View>
-                <View
-                  style={tw`absolute bottom-0 -left-12 py-px font-bold flex-initial ${
-                    data.entranceFees.length ? 'bg-red-600' : 'bg-red-400'
-                  } rounded-full px-2 gap-4`}>
-                  <Text
-                    style={tw`font-bold flex-initial rounded-full px-2 gap-4 text-white`}>
-                    {data.entranceFees.length
-                      ? `From R${
-                          data.entranceFees.sort(
-                            (a, b) => a.amount - b.amount,
-                          )[0]?.amount
-                        }`
-                      : 'Free'}
                   </Text>
                 </View>
               </View>

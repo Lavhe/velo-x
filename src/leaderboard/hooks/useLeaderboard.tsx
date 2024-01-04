@@ -12,7 +12,7 @@ export function useLeaderboard() {
 
   const dbFilter =
     filter.wheelDrive !== 'Any'
-      ? Filter.or(
+      ? Filter.and(
           Filter('profile.wheelDrive', '==', filter.wheelDrive),
           Filter(filter.driveOption, '!=', null),
         )

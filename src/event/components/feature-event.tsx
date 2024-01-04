@@ -111,14 +111,13 @@ function Content({data}: Props) {
                 </View>
               </View>
               <Text style={tw`font-semibold text-white py-4`}>
-                Entrance
                 {!Boolean(data.entranceFees.length) && (
                   <Text
                     style={tw`font-black flex-initial rounded-full text-red-400 px-2 gap-4`}>
-                    {' '}
-                    Free
+                    Free{' '}
                   </Text>
                 )}
+                Entrance
               </Text>
               <View style={tw`flex gap-2`}>
                 {data.entranceFees?.map((fee, i) => (

@@ -129,10 +129,14 @@ export function Content({
               {second && (
                 <View
                   style={tw`flex-1 mx-auto bg-primary shadow-lg bg-opacity-10 pt-4`}>
-                  <Image
-                    source={{uri: second.logo}}
-                    style={tw`h-16 w-16 rounded-full mx-auto`}
-                  />
+                  <View
+                    style={tw`h-16 w-16 rounded-full mx-auto items-center bg-white p-1`}>
+                    <Image
+                      source={{uri: second.logo}}
+                      resizeMode="contain"
+                      style={tw`h-full w-full rounded-full mx-auto`}
+                    />
+                  </View>
                   <Text
                     style={tw`text-white font-semibold text-center font-semibold py-1`}>
                     {second.vehicleName}
@@ -150,10 +154,14 @@ export function Content({
               )}
               {first && (
                 <View style={tw`flex-1 mx-auto bg-primary bg-opacity-20 pt-12`}>
-                  <Image
-                    source={{uri: first.logo}}
-                    style={tw`h-20 w-20 rounded-full mx-auto`}
-                  />
+                  <View
+                    style={tw`h-20 w-20 rounded-full mx-auto items-center bg-white p-1`}>
+                    <Image
+                      source={{uri: first.logo}}
+                      resizeMode="contain"
+                      style={tw`h-full w-full rounded-full mx-auto`}
+                    />
+                  </View>
                   <Text
                     style={tw`text-white font-semibold text-center font-semibold py-1`}>
                     {first.vehicleName}
@@ -171,10 +179,14 @@ export function Content({
               )}
               {third && (
                 <View style={tw`flex-1 mx-auto bg-primary bg-opacity-5 pt-4`}>
-                  <Image
-                    source={{uri: third.logo}}
-                    style={tw`h-12 w-12 rounded-full mx-auto`}
-                  />
+                  <View
+                    style={tw`h-12 w-12 rounded-full mx-auto items-center bg-white p-1`}>
+                    <Image
+                      source={{uri: third.logo}}
+                      resizeMode="contain"
+                      style={tw`h-full w-full rounded-full mx-auto`}
+                    />
+                  </View>
                   <Text
                     style={tw`text-white font-semibold text-center font-semibold py-1`}>
                     {third.vehicleName}
@@ -206,16 +218,20 @@ export function Content({
                     key={i}>
                     <Text style={tw`text-white text-sm`}>{i + 4}</Text>
 
-                    <Image
-                      source={{uri: value.logo}}
-                      style={tw`h-10 w-10 rounded-full mx-auto`}
-                    />
+                    <View
+                      style={tw`h-12 w-12 rounded-full mx-auto items-center bg-white p-1`}>
+                      <Image
+                        source={{uri: value.logo}}
+                        resizeMode="contain"
+                        style={tw`h-full w-full rounded-full mx-auto`}
+                      />
+                    </View>
                     <View style={tw`flex-1 font-semibold`}>
                       <Text style={tw`text-white font-semibold`}>
-                        {value.driverName}
+                        {value.vehicleName}
                       </Text>
                       <Text style={tw`text-white text-sm font-light`}>
-                        {value.vehicleName}
+                        {value.driverName}
                       </Text>
                     </View>
                     <Text
