@@ -1,5 +1,0 @@
-git_url("https://github.com/Lavhe/velo-x-fastlane")
-
-storage_mode("git")
-
-type("appstore")

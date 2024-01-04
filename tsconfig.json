@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "velo-x/*": ["src/*"]
+    }
+  },
+  "extends": "@react-native/typescript-config/tsconfig.json"
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>164734131285-78hq5ehuj31bom0cjlsadl0ts6hq42fo.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCqXHTbe5zRTMuU_KUBR0nQtpVcPTxd2p0</string>
+	<key>BUNDLE_ID</key>
+	<string>com.jmrsquared.velo-x</string>
+	<key>CLIENT_ID</key>
+	<string>164734131285-fc9gm26q9tkt9i8m41pvam02ic26uki5.apps.googleusercontent.com</string>
+	<key>GCM_SENDER_ID</key>
+	<string>164734131285</string>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:164734131285:ios:2e6e5fdc08fcf9ebbd88dc</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<false/>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>PROJECT_ID</key>
+	<string>velox-b6cdd</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.164734131285-fc9gm26q9tkt9i8m41pvam02ic26uki5</string>
+	<key>STORAGE_BUCKET</key>
+	<string>velox-b6cdd.appspot.com</string>
+</dict>
+</plist>
